@@ -1,4 +1,4 @@
 bank-payment
-queue
 field-service
+queue
 sale-reporting
