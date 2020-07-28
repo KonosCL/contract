@@ -3,3 +3,5 @@ field-service
 queue
 sale-reporting
 account-invoicing
+account-closing
+sale-workflow

@@ -161,7 +161,8 @@ class ContractAbstractContractLine(models.AbstractModel):
         else:
             return 1
 
-    def is_recurring_note(self):
+    @api.depends("display_type", "note_invoicing_mode")
+    def _compute_is_recurring_note(self):
         for record in self:
             record.is_recurring_note = (
                 record.display_type == 'line_note'
@@ -191,12 +192,18 @@ class ContractAbstractContractLine(models.AbstractModel):
         """
         for line in self:
             if line.automatic_price:
+                pricelist = (
+                    line.contract_id.pricelist_id or
+                    line.contract_id.partner_id.with_context(
+                        force_company=line.contract_id.company_id.id,
+                    ).property_product_pricelist
+                )
                 product = line.product_id.with_context(
                     quantity=line.env.context.get(
                         'contract_line_qty',
                         line.quantity,
                     ),
-                    pricelist=line.contract_id.pricelist_id.id,
+                    pricelist=pricelist.id,
                     partner=line.contract_id.partner_id.id,
                     date=line.env.context.get(
                         'old_date', fields.Date.context_today(line)

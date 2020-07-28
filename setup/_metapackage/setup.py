@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo12-addon-agreement',
+        'odoo12-addon-agreement_account',
         'odoo12-addon-agreement_legal',
         'odoo12-addon-agreement_legal_sale',
         'odoo12-addon-agreement_legal_sale_fieldservice',
@@ -21,6 +22,7 @@ setuptools.setup(
         'odoo12-addon-agreement_stock',
         'odoo12-addon-contract',
         'odoo12-addon-contract_forecast',
+        'odoo12-addon-contract_invoice_start_end_dates',
         'odoo12-addon-contract_layout_category_hide_detail',
         'odoo12-addon-contract_mandate',
         'odoo12-addon-contract_payment_mode',
